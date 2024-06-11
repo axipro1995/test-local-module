@@ -1,23 +1,17 @@
-# Check out https://hub.docker.com/_/node to select a new base image
-FROM node:16-slim
+# Build
+FROM node:16-slim as builder
+WORKDIR /app
+RUN mkdir common; mkdir web
 
-# Create app directory (with user `node`)
-RUN mkdir -p /home/node/app
+WORKDIR /app/common
+COPY common/package*.json ./
+RUN npm install
+COPY common .
 
-WORKDIR /home/node/app
+WORKDIR /app/web
+COPY web/package*.json ./
+RUN npm install
+COPY web .
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN yarn
-COPY . .
-RUN yarn global add pm2
-
-
-# Bind to all network interfaces so that it can be mapped to the host OS
-ENV HOST=0.0.0.0 PORT=3000
-
-EXPOSE ${PORT}
-CMD npx sequelize-cli db:migrate; pm2 start bin/www; pm2 log www
+WORKDIR /app/web
+CMD node src/index.js
