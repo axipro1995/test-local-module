@@ -1,0 +1,13 @@
+{
+	"name": "test-common",
+	"version": "1.0.0",
+	"description": "test-common",
+	"main": "src/index.js",
+	"scripts": {},
+	"keywords": [],
+	"author": "axipro",
+	"license": "ISC",
+	"dependencies": {
+		"moment": "^2.29.4"
+	}
+}
