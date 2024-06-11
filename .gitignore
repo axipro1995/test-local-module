@@ -1,5 +1,9 @@
 Dockerfile
 !*/**/Dockerfile
+package.json
+!*/**/package.json
+package-lock.json
+!*/**/package-lock.json
 
 # Logs
 logs

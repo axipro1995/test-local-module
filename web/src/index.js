@@ -1,4 +1,4 @@
-const { dateToStringFw } = require("common-module/src/helper");
+const { dateToStringFw } = require("test-common/src/helper");
 
 function main() {
     console.log(dateToStringFw());
